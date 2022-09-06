@@ -20,3 +20,12 @@ This program allows you to track weapons from the popular video game Elden Ring,
 
 I feel much more comfortable now doing basic entity mapping and testing CRUD via Postman. Using RESTful technology simplifies the process and makes me feel much more confident in my overall coding abilities. 
 
+### Routing
+
+| Return Type      | Route                    | Functionality                      |
+| ---------------- | ------------------------ | ---------------------------------- |
+| List <Armament>  | GET api/armaments        | Get all armaments                  |
+| Armament         | GET api/armaments/{id}   | Get one armament by id             |
+| Armament         | POST api/armaments       | Creates a new armament             |
+| Armament         | PUT api/armaments/{id}   | Updates armament by id             |
+| void             | DELTE api/armaments/{id} | Deletes an existing armament by id |
