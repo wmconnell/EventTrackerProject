@@ -71,6 +71,15 @@ function loadAllArmaments() {
 	xhr.send();
 }
 
+function getTotalArmaments(armamentList) {
+	let dataDiv = document.getElementById("totalArmaments");
+	dataDiv.textContent = '';
+	let h2 = document.createElement('h2');
+	h2.textContent = "Total number of tracked armaments: " + armamentList.length;
+	dataDiv.appendChild(h2);
+} 
+
+
 function displayArmaments(armamentList) {
 	let dataDiv = document.getElementById("armamentList");
 	dataDiv.textContent = '';
@@ -83,8 +92,8 @@ function displayArmaments(armamentList) {
 		} */
 
 
-
 	createTable(armamentList);
+	getTotalArmaments(armamentList);
 }
 
 let createTable = function(armamentList) {
@@ -137,6 +146,7 @@ function addNewArmament(armament) {
 			if (xhr.status === 200 || xhr.status === 201) {
 				console.log('Armament created');
 				displayArmament(JSON.parse(xhr.responseText));
+				displayMessage("Entry added");
 			}
 			else if (xhr.status === 404) {
 				displayError('Invalid data');
@@ -150,6 +160,7 @@ function addNewArmament(armament) {
 	xhr.send(armamentJson);
 
 }
+
 
 
 
@@ -287,6 +298,7 @@ function displayArmament(armament) {
 	//	if (!isNaN(armament) && armament.id > 0) {
 			console.log('Updated Armament ID: ' + armament.id);
 			deleteArmament(armament.id);
+			
 	//	}
 
 	});
@@ -306,6 +318,7 @@ function updateArmament(armament) {
 				console.log(xhr.responseText);
 				let updatedArmament = JSON.parse(xhr.responseText);
 				displayArmament(updatedArmament);
+					displayMessage("Entry updated")
 			} else if (xhr.status === 404) {
 				displayError("Invalid data")
 			} else {
@@ -331,6 +344,7 @@ function deleteArmament(armamentId) {
 			if (xhr.status === 204) {
 				console.log("Armament deleted");
 				console.log(xhr.responseText);
+				displayMessage("Entry deleted")
 			} else if (xhr.status === 404) {
 				displayError("Invalid data")
 			} else {
@@ -367,6 +381,12 @@ function getArmament(armamentId) {
 }
 
 function displayError(msg) {
+	let dataDiv = document.getElementById('armamentData');
+	dataDiv.textContent = "";
+	dataDiv.textContent = msg;
+}
+
+function displayMessage(msg) {
 	let dataDiv = document.getElementById('armamentData');
 	dataDiv.textContent = "";
 	dataDiv.textContent = msg;
