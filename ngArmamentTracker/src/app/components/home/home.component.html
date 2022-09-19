@@ -1,0 +1,85 @@
+<h1 (click)="selected = null">Weapon Stash</h1>
+
+
+<div *ngIf="!selected">
+
+  <table class="table table-light">
+    <thead class="table-dark">
+      <th>Armament</th>
+      <th>Description</th>
+      <th></th>
+    </thead>
+
+    <tbody *ngFor="let armament of armaments" >
+      <tr>
+        <td (click)="displayArmament(armament); selected = armament;">{{armament.name}}</td>
+        <td>{{armament.description}}</td>
+        <td><button (click)="deleteArmament(armament.id)">X</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+  <form>
+    <label>Armament Name: </label>
+    <input name="todo" [(ngModel)]="newArmament.name" />
+    <button (click)="addArmament()">Add New Armament</button>
+
+  </form>
+
+</div>
+
+<div id="armamentDetails" *ngIf="selected && !editArmament">
+
+
+
+
+  <table class="table table-light">
+    <thead class="table-dark">
+      <th>Id</th>
+      <th>Armament</th>
+      <th>Description</th>
+      <th>Weapon Type</th>
+      <th>Damage Type</th>
+      <th>Skill</th>
+      <th>Weight</th>
+      <th></th>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>{{selected.id}}</td>
+        <td>{{selected.name}}</td>
+        <td>{{selected.description}}</td>
+        <td>{{selected.weaponType}}</td>
+        <td>{{selected.damageType}}</td>
+        <td>{{selected.skill}}</td>
+        <td>{{selected.weight}}</td>
+      </tr>
+    </tbody>
+
+</table>
+<button (click)="setEditArmament()">Edit</button><br><br>
+    <button (click)="displayTable()">Display Table</button>
+</div>
+
+    <form *ngIf="editArmament">
+      <label>Name: </label>
+      <input type="text" name="task" [(ngModel)]="editArmament.name" /><br>
+      <label>Description: </label>
+      <input type="text" name="description" [(ngModel)]="editArmament.description" /><br>
+      <label>Weapon Type: </label>
+      <input type="text" name="weaponType" [(ngModel)]="editArmament.weaponType" /><br>
+      <label>Damage Type: </label>
+      <input type="text" name="damageType" [(ngModel)]="editArmament.damageType" /><br>
+      <label>Skill: </label>
+      <input type="text" name="weaponType" [(ngModel)]="editArmament.skill" /><br>
+      <label>Weight: </label>
+      <input type="number" name="weight" [(ngModel)]="editArmament.weight" /><br>
+      <button (click)="editArmament = null">Cancel</button>
+      <button (click)="updateArmament(editArmament)">Save</button>
+    </form>
+
+
+
